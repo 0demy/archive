@@ -1,0 +1,8 @@
+edGithub = "সম্পাদনা"
+tocHead = "এই পৃষ্ঠায়.."
+exercise = "অনুশীলনী"
+printThisPage = "প্রিন্ট"
+[id]
+    main = "মূল"
+[nav]
+    page = "পৃষ্ঠা"

@@ -1,0 +1,6 @@
+- id: 1
+  name: "Book One"
+  author: "Author One"
+- id: 2
+  name: "Book Two"
+  author: "Author Two"

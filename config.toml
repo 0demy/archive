@@ -1,0 +1,50 @@
+baseUrl = "https://zerodemy.com/"
+title =  "Zerodemy Archive"
+defaultContentLanguage = "bn"
+pluralizelisttitles = "false"
+paginate = 6
+
+[params]
+  math = true
+  siteLang = "bn-BD"
+  siteLogo = "/images/favicon.png"
+  siteOG = "/images/Aishik Rehman-og-image.png"
+  searchText = "খুঁজুন"
+  gsc = "https://cse.google.com/cse.js?cx=a3eaf405be35e4a4b"
+  [params.github]
+    repo = "discrete-mathematics"
+    branch = "main"
+    user = "aishikrehman"
+  [params.url]
+    main = https://zerodemy.com/"
+    site = "https://zerodemy.com/archive/"
+  [params.title]
+    subEN = "--"
+    subBN = "--"
+    titleBN = "জিরোডেমি আর্কাইভ"
+    titleEN = "Zerodemy Archive"
+    names = ["বিচ্ছিন্ন গণিত", "Discrete Mathematics in Bengali"]
+  [params.author]
+    name = "Aishik Rehman"
+    nameBN = "ঐশিক রেহমান"
+    email =  "hello@aishikrehman.com"
+    facebook =  "aishikrehman"
+    linkedin =  "aishikrehman"
+    github =   "aishikrehman"
+    phone =  "+88 016 016 60 666"
+    url =  "https://aishikrehman.com/about/"
+    picture =  "/assets/images/Aishik Rehman_Mymensingh_2019.jpg"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+      hardWraps = true
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
+[taxonomies]
+  categories = ""
