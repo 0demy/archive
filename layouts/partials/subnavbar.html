@@ -16,7 +16,7 @@
             {{ $next := add (int $page) 1 }}
             {{ $prev := sub (int $page) 1 }}
             {{ $hasPrev := lt $prev 1 }}
-            <a type="button" class="btn btn-outline-secondary {{ if $hasPrev }}disabled{{ end }}" href="{{ .Parent.RelPermalink }}{{ $prev }}">
+            <a type="button" class="btn btn-outline-secondary {{ if $hasPrev }}disabled{{ end }}" href="{{ .Site.Params.url.site }}{{ .File.Dir }}{{ $prev }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-caret-left-fill" viewBox="0 0 16 16">
                     <path
@@ -37,7 +37,7 @@
             <span type="button" class="btn btn-outline-secondary active">{{i18n "nav.page"}}: {{ $filename }}</span>
             {{ end }}
            
-            <a type="button" class='btn btn-outline-secondary {{ if isset .Params "last" }}disabled{{ end }}' href="{{ .Parent.RelPermalink }}{{ $next }}">
+            <a type="button" class='btn btn-outline-secondary {{ if isset .Params "last" }}disabled{{ end }}' href="{{ .Site.Params.url.site }}{{ .File.Dir }}{{ $next }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-caret-right-fill" viewBox="0 0 16 16">
                     <path
