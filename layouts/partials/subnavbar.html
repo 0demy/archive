@@ -37,7 +37,7 @@
             <span type="button" class="btn btn-outline-secondary active">{{i18n "nav.page"}}: {{ $filename }}</span>
             {{ end }}
            
-            <a type="button" class='btn btn-outline-secondary {{ if isset .Params "last" }}disabled{{ end }}' href="/{{ .File.Dir }}{{ $next }}">
+            <a type="button" class='btn btn-outline-secondary {{ if isset .Params "last" }}disabled{{ end }}' href="{{ .Parent.RelPermalink }}{{ $next }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                     class="bi bi-caret-right-fill" viewBox="0 0 16 16">
                     <path
