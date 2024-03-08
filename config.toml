@@ -16,7 +16,7 @@ paginate = 6
     branch = "main"
     user = "aishikrehman"
   [params.url]
-    main = https://zerodemy.com/"
+    main = "https://zerodemy.com/"
     site = "https://zerodemy.com/archive/"
   [params.title]
     subEN = "--"
