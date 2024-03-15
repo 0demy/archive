@@ -1,6 +1,0 @@
-{{ $menuData := .Site.GetPage "data" (printf "menus/%s.yaml" .Params.mid) }}
-<ul>
-  {{ range $menuData.Data }}
-    <li><a href="{{ .url }}">{{ .name }}</a></li>
-  {{ end }}
-</ul>

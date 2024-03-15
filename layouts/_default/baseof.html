@@ -11,6 +11,7 @@
     {{ if .Param "math" }}
     {{ partialCached "math.html" . }}
     {{ end }}
+    
     {{ block "header" . }}{{ end }}
     <div class="watermark">{{ .Site.Title}} by {{ .Site.Params.author.name }}</div>
     <main class="page-wrapper">

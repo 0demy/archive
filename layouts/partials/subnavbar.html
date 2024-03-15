@@ -2,59 +2,27 @@
     <div class="container-xxl d-flex align-items-md-center">
         <span class="position-relative me-auto">{{ .Title }}</span>
         <div class="bookpage-navigation-box btn-group">
-            {{ if not (isset .Params "noc") }}
-            <a type="button" class="btn btn-outline-secondary" href='{{ .Parent.RelPermalink }}#{{ i18n "id.main"}}'>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-menu-down" viewBox="0 0 16 16">
-                    <path
-                        d="M7.646.146a.5.5 0 0 1 .708 0L10.207 2H14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h3.793zM1 7v3h14V7zm14-1V4a1 1 0 0 0-1-1h-3.793a1 1 0 0 1-.707-.293L8 1.207l-1.5 1.5A1 1 0 0 1 5.793 3H2a1 1 0 0 0-1 1v2zm0 5H1v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1zM2 4.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5m0 4a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5" />
-                </svg>
-            </a>
-            {{ end }}
+            {{ $currentDirectory := .File.Dir }}
+            {{ $currentDirectoryParsed := replace $currentDirectory "\\" "/" }}
             {{ if or (isset .Params "page") (isset .Params "p") }}
-            {{ $page := default .Params.page .Params.p }}
-            {{ $next := add (int $page) 1 }}
-            {{ $prev := sub (int $page) 1 }}
-            {{ $hasPrev := lt $prev 1 }}
-            <a type="button" class="btn btn-outline-secondary {{ if $hasPrev }}disabled{{ end }}" href="{{ .Site.Params.url.site }}{{ .File.Dir }}{{ $prev }}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                    <path
-                        d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                </svg>
-            </a>
-            {{/*  {{ if $hasPrev }} {{ else }}
-            <a type="button" class="btn btn-outline-secondary" href="{{ .Parent.RelPermalink }}{{ $prev }}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                    <path
-                        d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                </svg>
-            </a>
-            {{ end }}  */}}
-            {{ with .File }}
-            {{ $filename := .BaseFileName }}
-            <span type="button" class="btn btn-outline-secondary active">{{i18n "nav.page"}}: {{ $filename }}</span>
+            {{ $currentPage := default .Params.page .Params.p }}
+            {{ $nextPage := add (int $currentPage) 1 }}
+            {{ $prevPage := sub (int $currentPage) 1 }}
+
+            {{ $nextPageParsed := urls.JoinPath .Site.BaseURL $currentDirectoryParsed $nextPage }}
+            {{ $prevPageParsed := urls.JoinPath .Site.BaseURL $currentDirectoryParsed $prevPage }}
+            {{ $hasPrev := lt $prevPage 1 }}
+
+            {{ if not (isset .Params "noc") }}
+            <a type="button" class="btn btn-outline-secondary" href='{{.Site.BaseURL}}{{ $currentDirectoryParsed }}#{{ i18n "id.main"}}'>¶</a>
             {{ end }}
-           
-            <a type="button" class='btn btn-outline-secondary {{ if isset .Params "last" }}disabled{{ end }}' href="{{ .Site.Params.url.site }}{{ .File.Dir }}{{ $next }}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                    <path
-                        d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                </svg>
-            </a>
-            {{/*  {{ if not (isset .Params "last") }}
-            <a type="button" class="btn btn-outline-secondary" href="{{ .Parent.RelPermalink }}{{ $next }}">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                    <path
-                        d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                </svg>
-            </a>
-            {{ end}}  */}}
+            <a type="button" class="btn btn-outline-secondary {{ if $hasPrev }}disabled{{ end }}"
+                href="{{ $prevPageParsed }}">«</a>
+            {{ with .File }}<span type="button" class="btn btn-outline-secondary active">{{i18n "nav.page"}}: {{
+                $currentPage }}</span>{{ end }}
+            <a type="button" class='btn btn-outline-secondary {{ if isset .Params "last" }}disabled{{ end }}'
+                href="{{ $nextPageParsed }}">» </a>
             {{ end }}
-            
         </div>
     </div>
 </nav>
